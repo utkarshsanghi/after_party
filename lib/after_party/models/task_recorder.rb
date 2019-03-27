@@ -4,7 +4,7 @@ module AfterParty
     include ActiveModel::Naming
     attr_reader :filename, :timestamp, :task_name
 
-    FILE_MASK = File.join(Rails.root, 'lib/tasks/deployment/*.rake')
+    FILE_MASK = AfterParty::MIGRATION_PATH_MASK || File.join(Rails.root, 'lib/tasks/deployment/*.rake')
 
     def self.pending_files
       Dir[FILE_MASK].collect { |f| TaskRecorder.new(f) }
